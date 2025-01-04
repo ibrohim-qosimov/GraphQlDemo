@@ -21,13 +21,13 @@ namespace GraphQlDemo
             builder.Services.AddScoped<ProductRepository>();
 
             builder.Services
-                .AddGraphQLServer()
-                .AddQueryType<ProductQuery>()
-                .AddMutationType<ProductMutation>();
+                .AddGraphQLServer() // Graph serverni servise siqatida qo'shish
+                .AddQueryType<ProductQuery>() // Queryni qo'shsih
+                .AddMutationType<ProductMutation>(); // Muatationni qo'shish
 
             var app = builder.Build();
 
-            app.MapGraphQL();
+            app.MapGraphQL(); // so'rovni /graphql endpointiga yo'naltirish uchun ishlatilyapti ekan deb tushundim 
 
             app.Run();
         }
