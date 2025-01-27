@@ -29,5 +29,18 @@ namespace GraphQlDemo.Repositories
             _context.SaveChanges();
             return result;
         }
+
+        public Product AlterProduct(int id, ProductDTO productDTO)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            if (product == null)
+            {
+                throw new Exception("Not found!");
+            }
+            product.Name = productDTO.Name;
+            product.Description = productDTO.Description;
+            _context.SaveChanges();
+            return product;
+        }
     }
 }

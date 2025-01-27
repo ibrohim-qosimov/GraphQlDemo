@@ -4,6 +4,7 @@ using GraphQlDemo.Persistance;
 using GraphQlDemo.Queries;
 using GraphQlDemo.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace GraphQlDemo
 {
@@ -13,10 +14,6 @@ namespace GraphQlDemo
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<DemoGhCbContext>(ops =>
-            {
-                ops.UseNpgsql(builder.Configuration.GetConnectionString("Db"));
-            });
 
             builder.Services.AddScoped<ProductRepository>();
 
@@ -24,6 +21,9 @@ namespace GraphQlDemo
                 .AddGraphQLServer() // Graph serverni servise siqatida qo'shish
                 .AddQueryType<ProductQuery>() // Queryni qo'shsih
                 .AddMutationType<ProductMutation>(); // Muatationni qo'shish
+
+            builder.Services.AddDbContext<DemoGhCbContext>(options =>
+                options.UseNpgsql(builder.Configuration.GetConnectionString("Db")));
 
             var app = builder.Build();
 

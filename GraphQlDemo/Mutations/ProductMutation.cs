@@ -19,10 +19,19 @@ namespace GraphQlDemo.Mutations
             _repository = repository;
         }
 
+        [GraphQLName("addProduct")]
         public Product AddProduct(string name, string description)
         {
             var productDTO = new ProductDTO { Name = name, Description = description };
             var result = _repository.AddProduct(productDTO);
+            return result;
+        }
+
+        [GraphQLName("alterProduct")]
+        public Product AlterProduct(int id, string name, string description)
+        {
+            var productDTO = new ProductDTO { Name = name, Description = description };
+            var result = _repository.AlterProduct(id, productDTO);
             return result;
         }
     }
