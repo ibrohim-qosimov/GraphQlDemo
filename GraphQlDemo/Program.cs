@@ -16,10 +16,12 @@ namespace GraphQlDemo
 
 
             builder.Services.AddScoped<ProductRepository>();
+            builder.Services.AddScoped<UserRepository>();
 
             builder.Services
                 .AddGraphQLServer() // Graph serverni servise siqatida qo'shish
-                .AddQueryType<ProductQuery>() // Queryni qo'shsih
+                .AddQueryType<ProductQuery>()
+                .AddQueryType<ProductQuery>()// Queryni qo'shsih
                 .AddMutationType<ProductMutation>(); // Muatationni qo'shish
 
             builder.Services.AddDbContext<DemoGhCbContext>(options =>
