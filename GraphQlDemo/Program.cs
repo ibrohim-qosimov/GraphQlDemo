@@ -5,6 +5,7 @@ using GraphQlDemo.Queries;
 using GraphQlDemo.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace GraphQlDemo
 {
@@ -19,10 +20,14 @@ namespace GraphQlDemo
             builder.Services.AddScoped<UserRepository>();
 
             builder.Services
-                .AddGraphQLServer() // Graph serverni servise siqatida qo'shish
-                .AddQueryType<ProductQuery>()
-                .AddQueryType<ProductQuery>()// Queryni qo'shsih
-                .AddMutationType<ProductMutation>(); // Muatationni qo'shish
+            .AddGraphQLServer()
+                .AddQueryType<Query>() // Asosiy Query turi
+                    .AddTypeExtension<ProductQuery>() // Kengaytmalar
+                    .AddTypeExtension<UserQuery>()
+                .AddMutationType<Mutation>() // Asosiy Mutation turi
+                    .AddTypeExtension<ProductMutation>()
+                    .AddTypeExtension<UserMutation>();
+
 
             builder.Services.AddDbContext<DemoGhCbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("Db")));

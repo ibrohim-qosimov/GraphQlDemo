@@ -1,9 +1,11 @@
 ﻿using GraphQlDemo.DTOs;
 using GraphQlDemo.Models;
 using GraphQlDemo.Repositories;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace GraphQlDemo.Mutations
 {
+    [ExtendObjectType(typeof(Mutation))]
     public class ProductMutation
     {
 
@@ -12,7 +14,7 @@ namespace GraphQlDemo.Mutations
             ## Mutation lar serverda o'zgartirish kiritish uchun ishlatiladi(yaratish,o'chirish hamda, o'zgartirish) va graphql dagi asosiy so'rov turi hisoblanadi.
          
          */
-        public ProductRepository _repository;
+        private readonly ProductRepository _repository;
 
         public ProductMutation(ProductRepository repository)
         {

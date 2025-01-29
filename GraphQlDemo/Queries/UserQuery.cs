@@ -1,7 +1,9 @@
 ﻿using GraphQlDemo.Models;
 using GraphQlDemo.Repositories;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace GraphQlDemo.Queries
 {
+    [ExtendObjectType(typeof(Query))]
     public class UserQuery
     {
         private readonly UserRepository _repository;
